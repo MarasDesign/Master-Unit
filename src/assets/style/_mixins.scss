@@ -1,0 +1,70 @@
+// Mobile breakpoints
+// ======================================
+
+@mixin tablet {
+  @media screen and (max-width: $breakpointTablet) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media screen and (max-width: $breakpointMobile) {
+    @content;
+  }
+}
+
+
+// Convert pixels to ems
+// eg. for a relational value of 12px write em(12) when the parent is 16px
+// if the parent is another value say 24px write em(12, 24)
+// ======================================
+
+@function em($pixels, $context: $baseEm) {
+  @if (unitless($pixels)) {
+    $pixels: $pixels * 1px;
+  }
+
+  @if (unitless($context)) {
+    $context: $context * 1px;
+  }
+
+  @return $pixels / $context * 1em;
+}
+
+
+// Clearfix mixin
+// ======================================
+
+@mixin cfx() {
+  &:after {
+    display: table;
+    clear: both;
+    content: "";
+	}
+}
+
+
+// Reset lists
+// include this mixin for unstyled lists
+// ======================================
+
+@mixin reset-list() {
+  margin: 0;
+  padding: 0;
+
+  li {
+    list-style: none;
+  }
+}
+
+
+// Different browsers
+// ======================================
+
+@mixin vp($name, $argument) {
+  -webkit-#{$name}: #{$argument};
+  -ms-#{$name}: #{$argument};
+  -moz-#{$name}: #{$argument};
+  -o-#{$name}: #{$argument};
+  #{$name}: #{$argument};
+}
